@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch randArray.html",
-            "file": "${workspaceFolder}/Lab01/randArray.html"
+            "name": "Launch dateLab.html",
+            "file": "${workspaceFolder}/Lab02/dateLab.html"
         },
 
 
