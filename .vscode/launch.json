@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch kochMountain,html",
-            "file": "${workspaceFolder}/HW02/kochMouatains.html"
+            "name": "Launch kochMountain.html",
+            "file": "${workspaceFolder}/HW02/kochMountains.html"
         },
 
 

@@ -97,11 +97,11 @@ function render()
         vec2( 1.00, 0.00)
     ];
     positions = [];
-    divideTriangle( vertices[0], vertices[1], vertices[2],
-                    numTimesToSubdivide);
+    //divideTriangle( vertices[0], vertices[1], vertices[2],
+    //               numTimesToSubdivide);
 
     gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(positions));
     gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.drawArrays( gl.TRIANGLES, 0, positions.length );
+    gl.drawArrays( gl.LINES, 0, positions.length );
     positions = [];
 }
