@@ -93,9 +93,8 @@ function divideTriangle(a, b, c, count)
 function render()
 {
     var vertices = [
-        vec2(-1, -1),
-        vec2(0,  1),
-        vec2(1, -1)
+        vec2(-1.00, 0.00),
+        vec2( 1.00, 0.00)
     ];
     positions = [];
     divideTriangle( vertices[0], vertices[1], vertices[2],

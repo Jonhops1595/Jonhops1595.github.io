@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch dateLab.html",
-            "file": "${workspaceFolder}/Lab02/dateLab.html"
+            "name": "Launch kochMountain,html",
+            "file": "${workspaceFolder}/HW02/kochMouatains.html"
         },
 
 
