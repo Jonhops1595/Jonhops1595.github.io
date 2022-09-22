@@ -63,34 +63,42 @@ function basicLine(a,b){
     positions.push(a,b);
 }
 
-function triangle(a, b, c)
-{
-    positions.push(a, b, c);
-}
-
 function createMountain(a, b, count)
 {
-
+    console.log("A" + a);
+    console.log("B" + b);
     // check for end of recursion
-
     if (count == 0) {
         positions.push(a,b);
+    }   
+    
+    // check if area is already a mountain
+    else if (a[1] != 0 || b[1] != 0){
+        positions.push(a,b);
     }
+
     else {
 
-        //bisect the sides
+        //Bisect the the line into 1/3s
+        var a_start = mix(a, b, 0.33);
+        var b_end = mix(a, b, 0.66);
 
-        var ab = mix(a, b, 0.5);
-        var ac = mix(a, c, 0.5);
-        var bc = mix(b, c, 0.5);
+        //Get the middle raised loc
+        var len = b_end[0] - a_start[0];
+        var c_x = a_start[0] + len/2;
+        var c_y = len * (Math.sqrt(3)/2) 
+        var c = vec2(c_x,c_y);
+        console.log("x: " + c_x)
+        console.log("y: " + c_y);
+
 
         --count;
 
-        // three new triangles
-
-        divideTriangle(a, ab, ac, count);
-        divideTriangle(c, ac, bc, count);
-        divideTriangle(b, bc, ab, count);
+        //Four new lines
+        createMountain(a, a_start, count);
+        createMountain(a_start, c, count);
+        createMountain(c, b_end, count);
+        createMountain(b_end, b, count);
     }
 }
 
