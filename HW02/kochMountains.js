@@ -64,7 +64,7 @@ function triangle(a, b, c)
     positions.push(a, b, c);
 }
 
-function divideTriangle(a, b, c, count)
+function createMountain(a, b, count)
 {
 
     // check for end of recursion
