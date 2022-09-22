@@ -59,6 +59,10 @@ function init()
     render();
 };
 
+function basicLine(a,b){
+    positions.push(a,b);
+}
+
 function triangle(a, b, c)
 {
     positions.push(a, b, c);
@@ -70,7 +74,7 @@ function createMountain(a, b, count)
     // check for end of recursion
 
     if (count == 0) {
-        triangle(a, b, c);
+        positions.push(a,b);
     }
     else {
 
@@ -97,8 +101,7 @@ function render()
         vec2( 1.00, 0.00)
     ];
     positions = [];
-    //divideTriangle( vertices[0], vertices[1], vertices[2],
-    //               numTimesToSubdivide);
+    createMountain( vertices[0], vertices[1], numTimesToSubdivide);
 
     gl.bufferSubData(gl.ARRAY_BUFFER, 0, flatten(positions));
     gl.clear( gl.COLOR_BUFFER_BIT );
