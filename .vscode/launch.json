@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch basicPointsLab.html",
-            "file": "${workspaceFolder}/Lab03/basicPointsLab.html"
+            "name": "Launch Lab04Primitives.html",
+            "file": "${workspaceFolder}/Lab04/Lab04Primitives.html"
         },
 
 
