@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch Lab04Primitives.html",
-            "file": "${workspaceFolder}/Lab04/Lab04Primitives.html"
+            "name": "Launch Lab05",
+            "file": "${workspaceFolder}/Lab05/Lab05ColorArray.html"
         },
 
 
