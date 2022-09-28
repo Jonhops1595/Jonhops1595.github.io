@@ -57,6 +57,16 @@ function init()
     gl.vertexAttribPointer( positionLoc , 2, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( positionLoc );
 
+    // a color buffer is created and attached
+    var cbufferId = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, cbufferId );
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW );
+    var colorLoc = gl.getAttribLocation( program, "aColor" );
+    gl.vertexAttribPointer( colorLoc, 4, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( colorLoc );
+
+    // slider event listener
+
     render();
 };
 
