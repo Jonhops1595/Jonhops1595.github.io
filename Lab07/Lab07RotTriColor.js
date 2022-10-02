@@ -34,8 +34,8 @@ function init()
 
     var vertices = [ //Starting vetices 
         vec2(1,0),
-        vec2(-Math.sqrt(2)/2,Math.sqrt(2)/2),
-        vec2(-Math.sqrt(2)/2,-Math.sqrt(2)/2)
+        vec2(-1/2,Math.sqrt(3)/2),
+        vec2(-1/2,-Math.sqrt(3)/2)
     ];
 
 
