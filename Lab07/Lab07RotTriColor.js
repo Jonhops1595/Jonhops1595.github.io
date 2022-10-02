@@ -10,6 +10,7 @@ var colorLoc;
 
 var delay = 100;
 var rotation = true;
+var direction = true;
 
 init();
 
@@ -61,11 +62,20 @@ function init()
 
 
    // keyboard listener here
-   // '1' = toggle rotation
-   // '2' = triangle is red (use the variable named color)
-   // '3' = triangle is green (use the variable named color)
-
-
+    window.onkeydown = (event) => {
+        var key = String.fromCharCode(event.keyCode);
+        switch(key){
+            case '1':   // '1' = toggle rotation
+                direction = !direction;
+                break;
+            case '2':   // '2' = triangle is red (use the variable named color)
+                color = vec4(1.0,0.0,0.0,1.0); //red
+                break;
+            case '3':   // '3' = triangle is green (use the variable named color)
+                color = vec4(0.0,1.0,0.0,1.0); //green
+                break;
+        }
+    }
 
     render();
 };
