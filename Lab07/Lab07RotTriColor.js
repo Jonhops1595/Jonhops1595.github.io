@@ -58,7 +58,7 @@ function init()
 
 
    // button listener here, toggle rotation
-
+    document.getElementById("Rotation").onclick = () => rotation = !rotation;
 
 
    // keyboard listener here
