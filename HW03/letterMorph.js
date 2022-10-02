@@ -63,15 +63,15 @@ function init()
         vec2(-.25,-.55),
         vec2(-.25,.55),
         vec2(-.75,.55)
-    ]
+    ];
 
 
     // Load the data into the GPU
 
     //U Buffer
-    var uBuffer = gl.createBuffer();
+    /*var uBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, uBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);*/
 
     //I Buffer
     var iBuffer = gl.createBuffer();
@@ -90,7 +90,7 @@ function init()
     colorLoc = gl.getUniformLocation( program, "aColor");
 
 
-   // button listener here, toggle rotation
+   // button listener here, toggle morph
     document.getElementById("morphButton").onclick = () => morphToggle = !morphToggle;
 
     render();
@@ -100,13 +100,13 @@ function render()
 {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    gl.uniform1f(thetaLoc, theta);
+    gl.uniform1f(morphPointLoc, morphPoint);
 
     gl.uniform4fv(colorLoc, color);
 
-    gl.drawArrays(gl.LINES, 0, 8);
+    gl.drawArrays(gl.LINE_LOOP, 0, I_vertices.length);
 
-    setTimeout(
-        function (){requestAnimationFrame(render);}, delay
-    );
+    //setTimeout(
+    //    function (){requestAnimationFrame(render);}, delay
+    //);
 }
