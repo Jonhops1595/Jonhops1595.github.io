@@ -31,10 +31,10 @@ function init()
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    var vertices = [
-        vec2(      ,      ),
-        vec2(      ,      ),
-        vec2(      ,      )
+    var vertices = [ //Starting vetices 
+        vec2(1,0),
+        vec2(-Math.sqrt(2)/2,Math.sqrt(2)/2),
+        vec2(-Math.sqrt(2)/2,-Math.sqrt(2)/2)
     ];
 
 
