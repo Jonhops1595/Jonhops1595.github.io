@@ -66,7 +66,7 @@ function init()
         var key = String.fromCharCode(event.keyCode);
         switch(key){
             case '1':   // '1' = toggle rotation
-                direction = !direction;
+                rotation = !rotation;
                 break;
             case '2':   // '2' = triangle is red (use the variable named color)
                 color = vec4(1.0,0.0,0.0,1.0); //red
