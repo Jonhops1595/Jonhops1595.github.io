@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<button id="Rotation">Toggle Rotation On-Off</button>
+<button id="morphButton">Toggle Morph On-Off</button>
 
 <canvas id="gl-canvas" width="512" height="512"> </canvas>
 
@@ -13,15 +13,12 @@
 #version 300 es
 
 in vec4 aPosition;
-uniform float uTheta;
+uniform float uMorphPoint
 
 void main()
 {
-    float s = sin(uTheta);
-    float c = cos(uTheta);
-
-    gl_Position.x = -s*aPosition.y + c*aPosition.x;
-    gl_Position.y =  s*aPosition.x + c*aPosition.y;
+    gl_Position.x = //To-do
+    gl_Position.y = //To-do 
     gl_Position.z = 0.0;
     gl_Position.w = 1.0;
 

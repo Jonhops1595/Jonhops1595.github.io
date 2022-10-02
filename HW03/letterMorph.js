@@ -2,15 +2,18 @@
 
 var gl;
 
-var theta = 0.0;
-var thetaLoc;
+var morphPoint = 0.0;
+    //0.0 = U
+    //1.0 = I
+var morphPointLoc;
 
 var color = vec4(0.0, 0.0, 1.0, 1.0);
 var colorLoc;
 
 var delay = 100;
-var rotation = true;
-var direction = true;
+var morphToggle = true;
+    //True: Moving 
+    //False: Stopped
 
 init();
 
@@ -32,11 +35,27 @@ function init()
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    var vertices = [ //Starting vetices 
-        vec2(1,0),
-        vec2(-1/2,Math.sqrt(3)/2),
-        vec2(-1/2,-Math.sqrt(3)/2)
+    var U_vertices = [ //Starting vetices 
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,)
     ];
+
+    var I_vertices = [
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,),
+        vec2(,)
+    ]
 
 
     // Load the data into the GPU
@@ -51,31 +70,14 @@ function init()
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLoc);
 
-    thetaLoc = gl.getUniformLocation( program, "uTheta" );
+    morphPointLoc = gl.getUniformLocation( program, "uMorphPoint" );
 
     //define the uniform variable in the shader, aColor
     colorLoc = gl.getUniformLocation( program, "aColor");
 
 
    // button listener here, toggle rotation
-    document.getElementById("Rotation").onclick = () => rotation = !rotation;
-
-
-   // keyboard listener here
-    window.onkeydown = (event) => {
-        var key = String.fromCharCode(event.keyCode);
-        switch(key){
-            case '1':   // '1' = toggle rotation
-                rotation = !rotation;
-                break;
-            case '2':   // '2' = triangle is red (use the variable named color)
-                color = vec4(1.0,0.0,0.0,1.0); //red
-                break;
-            case '3':   // '3' = triangle is green (use the variable named color)
-                color = vec4(0.0,1.0,0.0,1.0); //green
-                break;
-        }
-    }
+    document.getElementById("morphButton").onclick = () => morphToggle = !morphToggle;
 
     render();
 };
@@ -84,12 +86,11 @@ function render()
 {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    theta += (rotation ? 0.1 : 0.0);
     gl.uniform1f(thetaLoc, theta);
 
     gl.uniform4fv(colorLoc, color);
 
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.drawArrays(gl.LINES, 0, 8);
 
     setTimeout(
         function (){requestAnimationFrame(render);}, delay
