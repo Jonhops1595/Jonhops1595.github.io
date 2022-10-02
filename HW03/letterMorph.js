@@ -36,33 +36,47 @@ function init()
     gl.useProgram(program);
 
     var U_vertices = [ //Starting vetices 
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,)
+        vec2(-.5,.8),
+        vec2(-.35,.8),
+        vec2(-.35,-.25),
+        vec2(0,-.25),
+        vec2(.35,-.25),
+        vec2(.35,.8),
+        vec2(.5,.8),
+        vec2(.5,0),
+        vec2(.5,-.5),
+        vec2(0,-.5),
+        vec2(-.5,-.5),
+        vec2(-.5,0)
     ];
 
     var I_vertices = [
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,),
-        vec2(,)
+        vec2(-.75,.65),
+        vec2(.75,.65),
+        vec2(.75,.55),
+        vec2(.25,.55),
+        vec2(.25,-.55),
+        vec2(.75,-.55),
+        vec2(.75,-.65),
+        vec2(-.75,-.65),
+        vec2(-.75,-.55),
+        vec2(-.25,-.55),
+        vec2(-.25,.55),
+        vec2(-.75,.55)
     ]
 
 
     // Load the data into the GPU
 
-    var vBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
+    //U Buffer
+    var uBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, uBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
+
+    //I Buffer
+    var iBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, iBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);
 
     // Associate out shader variables with our data buffer
 
