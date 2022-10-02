@@ -20,12 +20,19 @@ function init() {
     
 
     // 1 - listener event for the mouse click
+    canvas.addEventListener("click", () => {
+        t = vec2(-1 + 2*event.clientX/canvas.width,
+                 -1 + 2*(canvas.height-event.clientY)/canvas.height);
+        points.push(t);
+        render();
+    })
+
     // 3 - will later need to be updated in conjunction with whether the points are saved
-    canvas.addEventListener("mousedown", function(event){
+    /*canvas.addEventListener("mousedown", function(event){
        t  = 
        points.push(t);
        render();
-    });
+    });*/
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
