@@ -54,7 +54,7 @@ function init()
     thetaLoc = gl.getUniformLocation( program, "uTheta" );
 
     //define the uniform variable in the shader, aColor
-
+    colorLoc = gl.getUniformLocation( program, "aColor");
 
 
    // button listener here, toggle rotation
