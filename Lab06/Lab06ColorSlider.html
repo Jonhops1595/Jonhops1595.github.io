@@ -15,22 +15,24 @@ Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
 
 <div>
-  Color Slider 0
-  <input id = "slider" type = "range" min = "0" max = "9" value="0"/>
+  Color Slider 1
+  <input id = "slider" type = "range" min = "1" max = "9" value="1"/>
   9
 </div>
 
 <script id="vertex-shader" type="x-shader/x-vertex">
 #version 300 es
 in vec4 aPosition;
+in vec4 aColor;
 out vec4 vColor;
+
 void
 main()
 {
   gl_PointSize = 25.0;
   gl_Position = aPosition;
   //vColor = vec4(1.0,0.0,0.0,1.0);
-  vColor = vec4((1.0+aPosition.xyz)/2.0,1.0);
+  vColor = aColor;
 }
 </script>
 

@@ -1,6 +1,8 @@
 "use strict";
 var gl;
 var points;
+var colors;
+var sliderNum = 1;
 init();
 
 function init()
@@ -23,16 +25,16 @@ function init()
     ];
 
     colors=[
-        vec4(.4, 0.0, .7, 1.0 ),
-        vec4(.2, 1.0, .2, 1.0 ),
-        vec4(1.0,1.0,1.0, 1.0 ),
-        vec4(.3,0.0,0.0, 1.0 ),
-        vec4(0.0,1,0.0, 1.0 ),
-        vec4(0.0,0.0,1.0, 1.0 ),
-        vec4(.8,.2,0.0, 1.0 ),
-        vec4(0.0,.4 ,0.8, 1.0 ),
-        vec4( .2,.9,.2, 1.0 )
-        ];
+    vec4(.4, 0.0, .7, 1.0 ),
+    vec4(.2, 1.0, .2, 1.0 ),
+    vec4(1.0,1.0,1.0, 1.0 ),
+    vec4(.3,0.0,0.0, 1.0 ),
+    vec4(0.0,1,0.0, 1.0 ),
+    vec4(0.0,0.0,1.0, 1.0 ),
+    vec4(.8,.2,0.0, 1.0 ),
+    vec4(0.0,.4 ,0.8, 1.0 ),
+    vec4(0.2,0.9,0.2, 1.0 )
+    ];
 
     //
     //  Configure WebGL
@@ -66,11 +68,17 @@ function init()
     gl.enableVertexAttribArray( colorLoc );
 
     // slider event listener
+    
+    document.getElementById("slider").onchange = function (event) {
+        sliderNum = parseInt(event.target.value);
+        render();
+    }
+
 
     render();
 };
 
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.drawArrays( gl.POINTS, 0, points.length );
+    gl.drawArrays( gl.POINTS, 0, sliderNum);
 }
