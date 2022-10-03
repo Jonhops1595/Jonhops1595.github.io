@@ -77,14 +77,19 @@ function init()
     gl.bindBuffer(gl.ARRAY_BUFFER, uBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
 
+    //Push U Positions to shader
+    var positionLoc = gl.getAttribLocation( program, "uPosition");
+    gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLoc);
+
     //I Buffer
     var iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, iBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);
 
-    // Associate out shader variables with our data buffer
+    //Push I Positions to shader
 
-    var positionLoc = gl.getAttribLocation( program, "aPosition");
+    var positionLoc = gl.getAttribLocation( program, "iPosition");
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLoc);
 
@@ -109,15 +114,9 @@ function render()
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     //Change direction of morph
-    if(morphPoint >= 1.0){
-        morphBy = -0.1;
-        gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);
-     }
+    if(morphPoint >= 1.0)  morphBy = -0.015;
 
-    else if (morphPoint <= 0.0) {
-        morphBy = 0.1;
-        gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
-    }
+    else if (morphPoint <= 0.0) morphBy = 0.015;
 
     morphPoint += (morphToggle ? morphBy : 0.0);
 
