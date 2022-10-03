@@ -123,7 +123,6 @@ function render()
 
     gl.drawArrays(gl.LINE_LOOP, 0, I_vertices.length);
 
-    console.log(morphPoint);
     setTimeout(
         function (){requestAnimationFrame(render);}, delay
     );
