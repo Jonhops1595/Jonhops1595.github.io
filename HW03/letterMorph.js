@@ -105,10 +105,6 @@ function init()
     render();
 };
 
-function calcBetweenPoint(){
-    
-}
-
 function render()
 {
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -122,6 +118,7 @@ function render()
 
     gl.uniform1f(morphPointLoc, morphPoint);
 
+    color = vec4(1-morphPoint, 0.0, morphPoint, 1.0);
     gl.uniform4fv(colorLoc, color);
 
     gl.drawArrays(gl.LINE_LOOP, 0, I_vertices.length);
