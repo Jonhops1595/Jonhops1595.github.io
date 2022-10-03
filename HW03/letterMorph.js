@@ -17,6 +17,7 @@ var delay = 100;
 var morphToggle = true;
     //True: Moving 
     //False: Stopped
+var morphBy = 0.1;
 
 init();
 
@@ -77,9 +78,9 @@ function init()
     gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
 
     //I Buffer
-    /*var iBuffer = gl.createBuffer();
+    var iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, iBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);*/
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);
 
     // Associate out shader variables with our data buffer
 
@@ -99,9 +100,26 @@ function init()
     render();
 };
 
+function calcBetweenPoint(){
+    
+}
+
 function render()
 {
     gl.clear(gl.COLOR_BUFFER_BIT);
+
+    //Change direction of morph
+    if(morphPoint >= 1.0){
+        morphBy = -0.1;
+        gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);
+     }
+
+    else if (morphPoint <= 0.0) {
+        morphBy = 0.1;
+        gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
+    }
+
+    morphPoint += (morphToggle ? morphBy : 0.0);
 
     gl.uniform1f(morphPointLoc, morphPoint);
 
@@ -109,7 +127,8 @@ function render()
 
     gl.drawArrays(gl.LINE_LOOP, 0, I_vertices.length);
 
-    //setTimeout(
-    //    function (){requestAnimationFrame(render);}, delay
-    //);
+    console.log(morphPoint);
+    setTimeout(
+        function (){requestAnimationFrame(render);}, delay
+    );
 }
