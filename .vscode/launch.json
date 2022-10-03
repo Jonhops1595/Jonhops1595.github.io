@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch Lab08",
-            "file": "${workspaceFolder}/Lab08/Lab08Click.html"
+            "name": "Launch letterMorph",
+            "file": "${workspaceFolder}/HW03/letterMorph.html"
         },
 
 

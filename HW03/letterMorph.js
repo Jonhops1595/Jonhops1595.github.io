@@ -2,6 +2,9 @@
 
 var gl;
 
+var U_vertices;
+var I_vertices;
+
 var morphPoint = 0.0;
     //0.0 = U
     //1.0 = I
@@ -35,7 +38,7 @@ function init()
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    var U_vertices = [ //Starting vetices 
+    U_vertices = [ //Starting vetices 
         vec2(-.5,.8),
         vec2(-.35,.8),
         vec2(-.35,-.25),
@@ -50,7 +53,7 @@ function init()
         vec2(-.5,0)
     ];
 
-    var I_vertices = [
+    I_vertices = [
         vec2(-.75,.65),
         vec2(.75,.65),
         vec2(.75,.55),
@@ -69,14 +72,14 @@ function init()
     // Load the data into the GPU
 
     //U Buffer
-    /*var uBuffer = gl.createBuffer();
+    var uBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, uBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);*/
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(U_vertices), gl.STATIC_DRAW);
 
     //I Buffer
-    var iBuffer = gl.createBuffer();
+    /*var iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, iBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(I_vertices), gl.STATIC_DRAW);*/
 
     // Associate out shader variables with our data buffer
 

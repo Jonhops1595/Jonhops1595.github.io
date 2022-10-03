@@ -13,16 +13,16 @@
 #version 300 es
 
 in vec4 aPosition;
-uniform float uMorphPoint
+uniform float uMorphPoint;
 
 void main()
 {
-    gl_Position.x = aPosition.x;
+    /*gl_Position.x = aPosition.x;
     gl_Position.y = aPosition.y;
     gl_Position.z = 0.0;
-    gl_Position.w = 1.0;
+    gl_Position.w = 1.0;*/
 
-    //gl_Position = aPosition;
+    gl_Position = aPosition;
 }
 </script>
 
