@@ -9,7 +9,7 @@
             "request": "launch",
             "reAttach": true,
             "name": "Launch ColorCube",
-            "file": "${workspaceFolder}/Lab09/Lab09ColorCube.html"
+            "file": "${workspaceFolder}/Lab10/Lab10ColorCube.html"
         },
 
 
