@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch ColorCube",
-            "file": "${workspaceFolder}/Lab10/Lab10ColorCube.html"
+            "name": "Launch 3DMorph",
+            "file": "${workspaceFolder}/HW04/3DMorph.html"
         },
 
 
