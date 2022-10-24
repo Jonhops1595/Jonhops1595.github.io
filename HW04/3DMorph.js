@@ -38,7 +38,17 @@ var flag = false;
         vec3(-.15, -.2, .25), //11
         vec3(.25, .5, .25), //12
         vec3(-.15,.5,.25), //13
-        vec3(-.15,-.2,-.25) //14
+        vec3(-.15,-.2,-.25), //14
+
+        vec3(-.65,.5,.25), //15
+        vec3(.65,.5,.25), //16
+        vec3(.65,.75,.25), //17
+        vec3(-.65,.75,.25),//18
+        vec3(-.65,.5,-.25), //19
+        vec3(.65,.5,-.25), //20
+        vec3(.65,.75,-.25), //21
+        vec3(-.65,.75,-.25) //22
+
     ];
 
     var vertexColors = [
@@ -66,8 +76,16 @@ var indices = [
     5,12,13,11, 255, //Front middle
     5,7,9,12, 255,  //Right middle
     14,7,9,10, 255,   //Back middle
-    11,13,10,14         //Left middle
+    11,13,10,14, 255,         //Left middle
+
     //Top of J
+    15,16,17,18, 255, //Front top
+    16,20,21,17, 255, //Right top
+    19,20,21,22, 255, //Back top
+    19,15,18,22, 255,  //Left top
+    17,21,22,18, 255, //Top Top
+    16,20,19,15       //Bottom top
+    
 
 ];
 
@@ -100,9 +118,15 @@ function init()
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 
     // color array atrribute buffer
-
-    for(var i = 0; i < indices.length; i++){
-        colors.push(vertexColors[i % vertexColors.length])
+    var colorCounter = 0;
+    for(var i = 0; i < indices.length; i+=4){
+        if(colorCounter > 3) {
+            colorCounter = 0;
+        }
+        for(var j = 0; j<4;j++){
+            colors.push(vertexColors[colorCounter]);
+        }
+        colorCounter++;
     }
 
     var cBuffer = gl.createBuffer();
