@@ -3,6 +3,8 @@
 var canvas;
 var gl;
 
+
+var colors = []
 var axis = 0;
 var xAxis = 0;
 var yAxis =1;
@@ -28,30 +30,44 @@ var flag = false;
         vec3(0.25,-0.5,.25), //4 
         vec3(0.25,-0.2,0.25), //5
         vec3(0.25,-0.5,-0.25), //6 
-        vec3(0.25,-0.2,-0.25) //7
+        vec3(0.25,-0.2,-0.25), //7
+
+        vec3(.25,-.2,-.25), //8
+        vec3(.25,.5,-.25), //9
+        vec3(-.15,.5,-.25), //10
+        vec3(-.15, -.2, .25), //11
+        vec3(.25, .5, .25), //12
+        vec3(-.15,.5,.25), //13
+        vec3(-.15,-.2,-.25) //14
     ];
 
     var vertexColors = [
-        vec4(0.0, 0.0, 0.0, 1.0),  // black
-        vec4(1.0, 0.0, 0.0, 1.0),  // red
+        vec4(1.0, 0.0, 0.0, 1.0), // red
+        //vec4(0.0, 0.0, 0.0, 1.0),  // black
         vec4(1.0, 1.0, 0.0, 1.0),  // yellow
-        vec4(0.0, 1.0, 0.0, 1.0),  // green
+        //vec4(0.0, 1.0, 0.0, 1.0),  // green
         vec4(0.0, 0.0, 1.0, 1.0),  // blue
         vec4(1.0, 0.0, 1.0, 1.0),  // magenta
-        vec4(1.0, 1.0, 1.0, 1.0),  // white
-        vec4(0.0, 1.0, 1.0, 1.0)   // cyan
+        //vec4(1.0, 1.0, 1.0, 1.0),  // white
+        //vec4(0.0, 1.0, 1.0, 1.0)   // cyan */
     ];
 
-// indices of the 12 triangles that compise the cube
 
 var indices = [
+    //Bottom of J
     0, 1, 2, 3, 255, //Left bottom
     0, 4, 5, 1, 255, //Front bottom
     3, 2, 7, 6, 255, //Back bottom
     0, 4, 6, 3, 255, //Bottom bottom
     2, 1, 5, 7, 255, //Top bottom
-    4, 6, 7, 5 //Right bottom
-
+    4, 6, 7, 5, 255,//Right bottom
+    
+    //Middle of J
+    5,12,13,11, 255, //Front middle
+    5,7,9,12, 255,  //Right middle
+    14,7,9,10, 255,   //Back middle
+    11,13,10,14         //Left middle
+    //Top of J
 
 ];
 
@@ -85,9 +101,13 @@ function init()
 
     // color array atrribute buffer
 
+    for(var i = 0; i < indices.length; i++){
+        colors.push(vertexColors[i % vertexColors.length])
+    }
+
     var cBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertexColors), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW);
 
     var colorLoc = gl.getAttribLocation(program, "aColor");
     gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
