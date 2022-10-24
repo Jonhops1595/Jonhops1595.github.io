@@ -9,18 +9,26 @@ var yAxis =1;
 var zAxis = 2;
 var theta = [0, 0, 0];
 var thetaLoc;
-var flag = true;
-var numElements = 29;
+var flag = false;
+//var numElements = 8
 
-    var vertices = [
+
+   /* var vertices = [
         vec3(-0.5, -0.5,  0.5),
         vec3(-0.5,  0.5,  0.5),
         vec3(0.5,  0.5,  0.5),
-        vec3(0.5, -0.5,  0.5),
-        vec3(-0.5, -0.5, -0.5),
-        vec3(-0.5,  0.5, -0.5),
-        vec3(0.5,  0.5, -0.5),
-        vec3(0.5, -0.5, -0.5)
+        vec3(0.5, -0.5,  0.5)
+    ]*/
+
+    var vertices = [
+        vec3(-0.55, -0.5,  0.25), //0
+        vec3(-0.55,-0.2,0.25), //1
+        vec3(-0.55,-0.2,-0.25), //2 
+        vec3(-0.55,-0.5,-0.25), //3
+        vec3(0.25,-0.5,.25), //4 
+        vec3(0.25,-0.2,0.25), //5
+        vec3(0.25,-0.5,-0.25), //6 
+        vec3(0.25,-0.2,-0.25) //7
     ];
 
     var vertexColors = [
@@ -37,12 +45,14 @@ var numElements = 29;
 // indices of the 12 triangles that compise the cube
 
 var indices = [
-    1, 0, 3, 2, 255,
-    2, 3, 7, 6, 255,
-    3, 0, 4, 7, 255,
-    6, 5, 1, 2, 255,
-    4, 5, 6, 7, 255,
-    5, 4, 0, 1
+    0, 1, 2, 3, 255, //Left bottom
+    0, 4, 5, 1, 255, //Front bottom
+    3, 2, 7, 6, 255, //Back bottom
+    0, 4, 6, 3, 255, //Bottom bottom
+    2, 1, 5, 7, 255, //Top bottom
+    4, 6, 7, 5 //Right bottom
+
+
 ];
 
 init();
@@ -118,6 +128,7 @@ function render()
     if(flag) theta[axis] += 2.0;
     gl.uniform3fv(thetaLoc, theta);
 
-    gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
+    console.log(indices.length);
+    gl.drawElements(gl.TRIANGLE_FAN,indices.length, gl.UNSIGNED_BYTE, 0);
     requestAnimationFrame(render);
 }
