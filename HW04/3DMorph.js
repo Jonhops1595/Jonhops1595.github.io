@@ -24,6 +24,7 @@ var j_vertices = [
     vec4(0.25,-0.5,-0.25,1.0), //6 
     vec4(0.25,-0.25,-0.25,1.0), //7
 
+
     vec4(.25,-.25,-.25,1.0), //8
     vec4(.25,.5,-.25,1.0), //9
     vec4(-.15,.5,-.25,1.0), //10
@@ -42,6 +43,36 @@ var j_vertices = [
     vec4(-.65,.75,-.25,1.0) //22
 ];
 
+var new_j_vertices = [
+    vec4(-0.55, -0.5,  0.25,1.0), //0
+    vec4(-0.55,-0.25,0.25,1.0), //1
+    vec4(-0.55,-0.25,-0.25,1.0), //2 
+    vec4(-0.55,-0.5,-0.25,1.0), //3
+    vec4(0.25,-0.5,.25,1.0), //4 
+    vec4(0.25,-0.25,0.25,1.0), //5
+    vec4(0.25,-0.5,-0.25,1.0), //6 
+    vec4(0.25,-0.25,-0.25,1.0), //7
+
+    vec4(-.15, -.25, .25,1.0), //8
+    vec4(0.25,-0.25,0.25,1.0), //9
+    vec4(.25, .5, .25,1.0), //10
+    vec4(-.15,.5,.25,1.0), //11
+    vec4(-.15,-.25,-.25,1.0), //12
+    vec4(.25,-.25,-.25,1.0), //13
+    vec4(.25,.5,-.25,1.0), //14
+    vec4(-.15,.5,-.25,1.0), //15
+
+    vec4(-.65,.5,.25,1.0), //16
+    vec4(.65,.5,.25,1.0), //17
+    vec4(.65,.75,.25,1.0), //18
+    vec4(-.65,.75,.25,1.0),//19
+    vec4(-.65,.5,-.25,1.0), //20
+    vec4(.65,.5,-.25,1.0), //21
+    vec4(.65,.75,-.25,1.0), //22
+    vec4(-.65,.75,-.25,1.0) //23
+
+];
+
 var h_vertices = [
     vec4(-.55,-.5,.25,1.0), //0
     vec4(-.7,-.5,.25,1.0), //1
@@ -55,8 +86,8 @@ var h_vertices = [
 ]
 var vertexColors = [
     vec4(1.0, 0.0, 0.0, 1.0), // red
-    //vec4(0.0, 0.0, 0.0, 1.0),  // black
-    //vec4(0.0, 1.0, 0.0, 1.0),  // green
+    vec4(0.0, 0.0, 0.0, 1.0),  // black
+    vec4(0.0, 1.0, 0.0, 1.0),  // green
     vec4(0.0, 0.0, 1.0, 1.0),  // blue
     vec4(1.0, 1.0, 0.0, 1.0),  // yellow
     vec4(1.0, 0.0, 1.0, 1.0), // magenta
@@ -86,7 +117,7 @@ function init()
     if (!gl) alert("WebGL 2.0 isn't available");
 
     //Call draw function
-    drawh();
+    drawj();
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
@@ -140,7 +171,7 @@ function init()
 function drawFace(a,b,c,d){
     let indices = [a, b, c, a, c, d];
     for(var i = 0; i < indices.length; i++){
-        positions.push(h_vertices[indices[i]]);
+        positions.push(new_j_vertices[indices[i]]);
         colors.push(vertexColors[indices[0] % vertexColors.length]);
         //colors.push(vec4(1.0, 0.0, 0.0, 1.0));
     }
@@ -157,18 +188,18 @@ function drawj(){
     drawFace(4, 6, 7, 5);//Right bottom
     
     //Middle of J
-    drawFace(5,12,13,11); //Front middle
-    drawFace(5,7,9,12);  //Right middle
-    drawFace(14,7,9,10);   //Back middle
-    drawFace(11,13,10,14);   //Left middle
+    drawFace(8,9,10,11); //Front middle
+    drawFace(9,13,14,10);  //Right middle
+    drawFace(12,13,14,15);   //Back middle
+    drawFace(12,15,11,8);   //Left middle
 
     //Top of J
-    drawFace(15,16,17,18); //Front top
-    drawFace(16,20,21,17); //Right top
-    drawFace(19,20,21,22); //Back top
-    drawFace(19,15,18,22);  //Left top
-    drawFace(17,21,22,18); //Top Top
-    drawFace(16,20,19,15);   //Bottom top
+    drawFace(16,17,18,19); //Front top
+    drawFace(17,21,22,18); //Right top
+    drawFace(20,21,22,23); //Back top
+    drawFace(20,16,19,23);  //Left top
+    drawFace(18,22,23,19); //Top Top
+    drawFace(17,21,20,16);   //Bottom top
     
 }
 
@@ -180,6 +211,10 @@ function drawh(){
     drawFace(1,5,7,2); //Left of left
     drawFace(0,1,2,3); //Bottom of left
     drawFace(5,4,6,7); //Top of left
+
+    //Middle 
+
+
 }
 
 
