@@ -3,7 +3,9 @@
 var canvas;
 var gl;
 
-var positions = [];
+var j_positions = [];
+var h_positions = [];
+
 var colors = [];
 var axis = 0;
 var xAxis = 0;
@@ -12,7 +14,15 @@ var zAxis = 2;
 var theta = [0, 0, 0];
 var thetaLoc;
 var flag = false;
-//var numElements = 8
+//var numPositions = 
+
+var morphPoint = 0.0;
+    //0.0 = J
+    //1.0 = H
+var morphPointLoc;
+var morphBy = 0.1;
+var morphToggle = false;
+
 
 var j_vertices = [
     vec4(-0.55, -0.5,  0.25,1.0), //0
@@ -110,9 +120,6 @@ function init()
     gl = canvas.getContext('webgl2');
     if (!gl) alert("WebGL 2.0 isn't available");
 
-    //Call draw function
-    drawh();
-
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
@@ -124,6 +131,39 @@ function init()
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
+    //Call draw function
+    drawj();
+
+    // vertex array attribute buffer
+
+    //J Buffer
+    var jBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, jBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(j_positions), gl.STATIC_DRAW);
+
+    //Push J Positions to shader
+    var positionLoc = gl.getAttribLocation( program, "jPosition");
+    gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLoc );
+
+    //H Buffer
+    //drawh();
+
+    var hBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, hBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(h_positions), gl.STATIC_DRAW);
+
+    //Push J Positions to shader
+    var positionLoc = gl.getAttribLocation( program, "hPosition");
+    gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLoc );
+    
+
+
+    morphPointLoc = gl.getUniformLocation( program, "uMorphPoint" );
+    thetaLoc = gl.getUniformLocation(program, "uTheta");   
+
+
     // color array atrribute buffer
     var cBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
@@ -132,18 +172,6 @@ function init()
     var colorLoc = gl.getAttribLocation(program, "aColor");
     gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(colorLoc);
-
-    // vertex array attribute buffer
-
-    var vBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(positions), gl.STATIC_DRAW);
-
-    var positionLoc = gl.getAttribLocation( program, "aPosition");
-    gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(positionLoc );
-
-    thetaLoc = gl.getUniformLocation(program, "uTheta");
 
     //event listeners for buttons
 
@@ -158,6 +186,8 @@ function init()
     };
     document.getElementById("ButtonT").onclick = function(){flag = !flag;};
 
+    // button listener here, toggle morph
+    document.getElementById("morphButton").onclick = () => morphToggle = !morphToggle;
     render();
 }
 
@@ -165,13 +195,18 @@ function init()
 function drawFace(a,b,c,d){
     let indices = [a, b, c, a, c, d];
     for(var i = 0; i < indices.length; i++){
-        positions.push(h_vertices[indices[i]]);
+        h_positions.push(h_vertices[indices[i]]);
+        j_positions.push(j_vertices[indices[i]])
         colors.push(vertexColors[indices[0] % vertexColors.length]);
         //colors.push(vec4(1.0, 0.0, 0.0, 1.0));
     }
 }
 
 function drawj(){
+
+    //positions = []; //Reset positions
+    colors = []; //Reset colors
+
 
     //Bottom of J
     drawFace(0, 1, 2, 3); //Left bottom
@@ -186,6 +221,8 @@ function drawj(){
     drawFace(9,13,14,10);  //Right middle
     drawFace(12,13,14,15);   //Back middle
     drawFace(12,15,11,8);   //Left middle
+    drawFace(15,14,10,11); //Top of middle
+    drawFace(8,9,13,12); //Bottom of middle
 
     //Top of J
     drawFace(16,17,18,19); //Front top
@@ -194,10 +231,14 @@ function drawj(){
     drawFace(20,16,19,23);  //Left top
     drawFace(18,22,23,19); //Top Top
     drawFace(17,21,20,16);   //Bottom top
+
     
 }
 
 function drawh(){
+
+    colors = []; //Reset colors
+
     //Left Block
     drawFace(1,0,4,5); //Front of left
     drawFace(0,3,6,4); //Right of left
@@ -222,6 +263,7 @@ function drawh(){
     drawFace(16,19,23,20), //Top of Right
     drawFace(21,20,16,17) //Left of Right
 
+
 }
 
 
@@ -229,9 +271,18 @@ function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+        //Change direction of morph
+    if(morphPoint >= 1.0)  morphBy = -0.015;
+
+    else if (morphPoint <= 0.0) morphBy = 0.015;
+
+    morphPoint += (morphToggle ? morphBy : 0.0);
+
+    gl.uniform1f(morphPointLoc, morphPoint);
+
     if(flag) theta[axis] += 2.0;
     gl.uniform3fv(thetaLoc, theta);
 
-    gl.drawArrays(gl.TRIANGLES,0, positions.length);
+    gl.drawArrays(gl.TRIANGLES,0, h_positions.length);
     requestAnimationFrame(render);
 }
