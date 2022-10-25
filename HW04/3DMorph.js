@@ -54,6 +54,16 @@ var h_vertices = [
     vec4(-.55,.75,-.25,1.0), //6
     vec4(-.7,.75,-.25,1.0), //7
 
+    vec4(-.55,.25,.25,1.0), //8
+    vec4(-.55,0,.25,1.0), //9
+    vec4(.55,.25,.25,1.0), //10
+    vec4(.55,0,.25,1.0), //11
+    vec4(-.55,.25,-.25,1.0), //12
+    vec4(-.55,0,-.25,1.0), //13
+    vec4(.55,0,-.25,1.0), //14
+    vec4(.55,.25,-.25,1.0), //15
+
+
 ]
 var vertexColors = [
     vec4(1.0, 0.0, 0.0, 1.0), // red
@@ -88,7 +98,7 @@ function init()
     if (!gl) alert("WebGL 2.0 isn't available");
 
     //Call draw function
-    drawj();
+    drawh();
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
@@ -142,7 +152,7 @@ function init()
 function drawFace(a,b,c,d){
     let indices = [a, b, c, a, c, d];
     for(var i = 0; i < indices.length; i++){
-        positions.push(j_vertices[indices[i]]);
+        positions.push(h_vertices[indices[i]]);
         colors.push(vertexColors[indices[0] % vertexColors.length]);
         //colors.push(vec4(1.0, 0.0, 0.0, 1.0));
     }
@@ -184,7 +194,11 @@ function drawh(){
     drawFace(5,4,6,7); //Top of left
 
     //Middle 
-
+    drawFace(8,9,11,10), //Front of Middle
+    drawFace(10,11,14,15), //Right of Middle
+    drawFace(12,13,14,15), //Back of Middle
+    drawFace(9,11,14,13), //Bottom of Middle
+    drawFace(8,10,15,12) //Top of Middle
 
 }
 
