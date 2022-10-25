@@ -41,20 +41,32 @@ var j_vertices = [
     vec4(.65,.75,-.25,1.0), //21
     vec4(-.65,.75,-.25,1.0) //22
 ];
-    var vertexColors = [
-        vec4(1.0, 0.0, 0.0, 1.0), // red
-        //vec4(0.0, 0.0, 0.0, 1.0),  // black
-        //vec4(0.0, 1.0, 0.0, 1.0),  // green
-        vec4(0.0, 0.0, 1.0, 1.0),  // blue
-        vec4(1.0, 1.0, 0.0, 1.0),  // yellow
-        vec4(1.0, 0.0, 1.0, 1.0), // magenta
-        //vec4(1.0, 1.0, 1.0, 1.0),  // white
-        //vec4(0.0, 1.0, 1.0, 1.0)   // cyan */
-        vec4(0.0, 0.0, 1.0, 1.0),  // blue
-        vec4(1.0, 1.0, 0.0, 1.0),  // yellow
-        vec4(1.0, 0.0, 1.0, 1.0), // magenta
-        vec4(1.0, 0.0, 0.0, 1.0)
-    ];
+
+var h_vertices = [
+    vec4(-.55,-.5,.25,1.0), //0
+    vec4(-.7,-.5,.25,1.0), //1
+    vec4(-.7,-.5,-.25,1.0), //2
+    vec4(-.55,-.5,-.25,1.0), //3
+    vec4(-.55,.75,.25,1.0), //4
+    vec4(-.7,.75,.25,1.0), //5
+    vec4(-.55,.75,-.25,1.0), //6
+    vec4(-.7,.75,-.25,1.0), //7
+
+]
+var vertexColors = [
+    vec4(1.0, 0.0, 0.0, 1.0), // red
+    //vec4(0.0, 0.0, 0.0, 1.0),  // black
+    //vec4(0.0, 1.0, 0.0, 1.0),  // green
+    vec4(0.0, 0.0, 1.0, 1.0),  // blue
+    vec4(1.0, 1.0, 0.0, 1.0),  // yellow
+    vec4(1.0, 0.0, 1.0, 1.0), // magenta
+    //vec4(1.0, 1.0, 1.0, 1.0),  // white
+    //vec4(0.0, 1.0, 1.0, 1.0)   // cyan */
+    vec4(0.0, 0.0, 1.0, 1.0),  // blue
+    vec4(1.0, 1.0, 0.0, 1.0),  // yellow
+    vec4(1.0, 0.0, 1.0, 1.0), // magenta
+    vec4(1.0, 0.0, 0.0, 1.0)
+];
 
     var vertexColorNames = [
         "Red",
@@ -74,7 +86,7 @@ function init()
     if (!gl) alert("WebGL 2.0 isn't available");
 
     //Call draw function
-    drawj();
+    drawh();
 
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
@@ -128,7 +140,7 @@ function init()
 function drawFace(a,b,c,d){
     let indices = [a, b, c, a, c, d];
     for(var i = 0; i < indices.length; i++){
-        positions.push(j_vertices[indices[i]]);
+        positions.push(h_vertices[indices[i]]);
         colors.push(vertexColors[indices[0] % vertexColors.length]);
         //colors.push(vec4(1.0, 0.0, 0.0, 1.0));
     }
@@ -161,25 +173,13 @@ function drawj(){
 }
 
 function drawh(){
-    var h_vertices = [
-        vec3(-.55,-.5,.25), //0
-        vec3(-.7,-.5,.25), //1
-        vec3(-.55,-.5,-.25), //2
-        vec3(-.7,-.5,-.25), //3
-        vec3(-.55,.75,.25), //4
-        vec3(-.7,.75,.25), //5
-        vec3(-.55,.75,-.25), //6
-        vec3(-.7,.75,-.25), //7
-
-    ]
-    
-        //Left Block
-        drawFace(1,0,4,5); //Front of left
-        drawFace(0,3,6,4); //Right of left
-        drawFace(2,3,6,7); //Back of left
-        drawFace(1,5,7,2); //Left of left
-        drawFace(1,0,3,2); //Bottom of left
-        drawFace(5,4,6,7); //Top of left
+    //Left Block
+    drawFace(1,0,4,5); //Front of left
+    drawFace(0,3,6,4); //Right of left
+    drawFace(2,3,6,7); //Back of left
+    drawFace(1,5,7,2); //Left of left
+    drawFace(0,1,2,3); //Bottom of left
+    drawFace(5,4,6,7); //Top of left
 }
 
 
