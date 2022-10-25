@@ -22,23 +22,23 @@ var flag = false;
         vec3(0.5, -0.5,  0.5)
     ]*/
 
-    var vertices = [
+    var j_vertices = [
         vec3(-0.55, -0.5,  0.25), //0
-        vec3(-0.55,-0.2,0.25), //1
-        vec3(-0.55,-0.2,-0.25), //2 
+        vec3(-0.55,-0.25,0.25), //1
+        vec3(-0.55,-0.25,-0.25), //2 
         vec3(-0.55,-0.5,-0.25), //3
         vec3(0.25,-0.5,.25), //4 
-        vec3(0.25,-0.2,0.25), //5
+        vec3(0.25,-0.25,0.25), //5
         vec3(0.25,-0.5,-0.25), //6 
-        vec3(0.25,-0.2,-0.25), //7
+        vec3(0.25,-0.25,-0.25), //7
 
-        vec3(.25,-.2,-.25), //8
+        vec3(.25,-.25,-.25), //8
         vec3(.25,.5,-.25), //9
         vec3(-.15,.5,-.25), //10
-        vec3(-.15, -.2, .25), //11
+        vec3(-.15, -.25, .25), //11
         vec3(.25, .5, .25), //12
         vec3(-.15,.5,.25), //13
-        vec3(-.15,-.2,-.25), //14
+        vec3(-.15,-.25,-.25), //14
 
         vec3(-.65,.5,.25), //15
         vec3(.65,.5,.25), //16
@@ -51,19 +51,42 @@ var flag = false;
 
     ];
 
+    var h_vertices = [
+        vec3(-.55,-.5,.25), //0
+        vec3(-.7,-.5,.25), //1
+        vec3(-.55,-.5,-.25), //2
+        vec3(-.7,-.5,-.25), //3
+        vec3(-.55,.75,.25), //4
+        vec3(-.7,.75,.25), //5
+        vec3(-.55,.75,-.25), //6
+        vec3(-.7,.75,-.25), //7
+
+    ]
+
     var vertexColors = [
         vec4(1.0, 0.0, 0.0, 1.0), // red
         //vec4(0.0, 0.0, 0.0, 1.0),  // black
-        vec4(1.0, 1.0, 0.0, 1.0),  // yellow
         //vec4(0.0, 1.0, 0.0, 1.0),  // green
         vec4(0.0, 0.0, 1.0, 1.0),  // blue
-        vec4(1.0, 0.0, 1.0, 1.0),  // magenta
+        vec4(1.0, 1.0, 0.0, 1.0),  // yellow
+        vec4(1.0, 0.0, 1.0, 1.0), // magenta
         //vec4(1.0, 1.0, 1.0, 1.0),  // white
         //vec4(0.0, 1.0, 1.0, 1.0)   // cyan */
+        vec4(0.0, 0.0, 1.0, 1.0),  // blue
+        vec4(1.0, 1.0, 0.0, 1.0),  // yellow
+        vec4(1.0, 0.0, 1.0, 1.0), // magenta
+        vec4(1.0, 0.0, 0.0, 1.0)
+    ];
+
+    var vertexColorNames = [
+        "Red",
+        "Blue",
+        "Yellow",
+        "Magenta"
     ];
 
 
-var indices = [
+var j_indices = [
     //Bottom of J
     0, 1, 2, 3, 255, //Left bottom
     0, 4, 5, 1, 255, //Front bottom
@@ -89,6 +112,17 @@ var indices = [
 
 ];
 
+var h_indices = [
+    //Left Block
+    1,0,4,5, 255, //Front of left
+    0,3,6,4, 255, //Right of left
+    2,3,6,7, 255, //Back of left
+    1,5,7,2, 255, //Left of left
+    1,0,3,2, 255, //Bottom of left
+    5,4,6,7       //Top of left
+
+];
+
 init();
 
 function init()
@@ -111,27 +145,24 @@ function init()
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    // array element buffer
-
-    var iBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
-
     // color array atrribute buffer
     var colorCounter = 0;
-    for(var i = 0; i < indices.length; i+=4){
-        if(colorCounter > 3) {
+    for(var i = 0; i < h_indices.length-10; i+=4){
+        if(colorCounter >3) {
             colorCounter = 0;
         }
-        for(var j = 0; j<4;j++){
+        for(var j = 0; j<2;j++){
+            console.log("Color " + vertexColorNames[colorCounter] + "\nFor indice: " + h_indices[i + j]);
             colors.push(vertexColors[colorCounter]);
         }
+        i++
         colorCounter++;
     }
+    console.log("Length of color array: " + colors.length)
 
     var cBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertexColors), gl.STATIC_DRAW);
 
     var colorLoc = gl.getAttribLocation(program, "aColor");
     gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
@@ -141,11 +172,19 @@ function init()
 
     var vBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(h_vertices), gl.STATIC_DRAW);
 
     var positionLoc = gl.getAttribLocation( program, "aPosition");
     gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLoc );
+
+    
+    // array element buffer
+
+    var iBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(h_indices), gl.STATIC_DRAW);
+
 
     thetaLoc = gl.getUniformLocation(program, "uTheta");
 
@@ -165,6 +204,7 @@ function init()
     render();
 }
 
+
 function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -172,7 +212,7 @@ function render()
     if(flag) theta[axis] += 2.0;
     gl.uniform3fv(thetaLoc, theta);
 
-    console.log(indices.length);
-    gl.drawElements(gl.TRIANGLE_FAN,indices.length, gl.UNSIGNED_BYTE, 0);
+    //console.log(h_indices.length);
+    gl.drawElements(gl.TRIANGLE_FAN,h_indices.length, gl.UNSIGNED_BYTE, 0);
     requestAnimationFrame(render);
 }
