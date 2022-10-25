@@ -63,6 +63,19 @@ var h_vertices = [
     vec4(.35,0,-.25,1.0), //14
     vec4(.35,.25,-.25,1.0), //15
 
+    vec4(.35,.75,.25,1.0), //16
+    vec4(.35,-.5,.25,1.0), //17
+    vec4(.7,-.5,.25,1.0), //18
+    vec4(.7,.75,.25,1.0), //19
+    vec4(.35,.75,-.25,1.0), //20
+    vec4(.35,-.5,-.25,1.0), //21
+    vec4(.7,-.5,-.25,1.0), //22
+    vec4(.7,.75,-.25,1.0), //23
+
+
+    
+
+
 
 ]
 var vertexColors = [
@@ -198,7 +211,16 @@ function drawh(){
     drawFace(10,11,14,15), //Right of Middle
     drawFace(12,13,14,15), //Back of Middle
     drawFace(9,11,14,13), //Bottom of Middle
-    drawFace(8,10,15,12) //Top of Middle
+    drawFace(8,10,15,12), //Top of Middle
+    drawFace(8,12,13,9) //Left of Middle
+
+    //Right
+    drawFace(16,17,18,19), //Front of Right
+    drawFace(19,18,22,23), //Right of Right
+    drawFace(20,21,22,23), //Back of Right
+    drawFace(17,18,22,21), //Bottom of Right
+    drawFace(16,19,23,20), //Top of Right
+    drawFace(21,20,16,17) //Left of Right
 
 }
 
