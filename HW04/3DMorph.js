@@ -14,7 +14,6 @@ var zAxis = 2;
 var theta = [0, 0, 0];
 var thetaLoc;
 var flag = false;
-//var numPositions = 
 
 var morphPoint = 0.0;
     //0.0 = J
@@ -81,13 +80,8 @@ var h_vertices = [
     vec4(.35,-.5,-.25,1.0), //21
     vec4(.7,-.5,-.25,1.0), //22
     vec4(.7,.75,-.25,1.0), //23
-
-
-    
-
-
-
 ]
+
 var vertexColors = [
     vec4(1.0, 0.0, 0.0, 1.0), // red
     vec4(0.0, 1.0, 0.0, 1.0),  // green
@@ -123,7 +117,7 @@ function init()
     gl.useProgram(program);
 
     //Call draw function
-    drawj();
+    draw();
     // vertex array attribute buffer
 
     //J Buffer
@@ -180,7 +174,6 @@ function init()
     render();
 }
 
-
 function drawFace(a,b,c,d,colorCode){
     let indices = [a, b, c, a, c, d];
     for(var i = 0; i < indices.length; i++){
@@ -191,7 +184,7 @@ function drawFace(a,b,c,d,colorCode){
     }
 }
 
-function drawj(){
+function draw(){
 
     //Bottom of J
     drawFace(0, 1, 2, 3, 0); //Left bottom
@@ -217,40 +210,7 @@ function drawj(){
     drawFace(18,22,23,19,4); //Top Top
     drawFace(17,21,20,16,3);   //Bottom top
 
-    
 }
-
-function drawh(){
-
-    colors = []; //Reset colors
-
-    //Left Block
-    drawFace(1,0,4,5); //Front of left
-    drawFace(0,3,6,4); //Right of left
-    drawFace(2,3,6,7); //Back of left
-    drawFace(1,5,7,2); //Left of left
-    drawFace(0,1,2,3); //Bottom of left
-    drawFace(5,4,6,7); //Top of left
-
-    //Middle 
-    drawFace(8,9,11,10), //Front of Middle
-    drawFace(10,11,14,15), //Right of Middle
-    drawFace(12,13,14,15), //Back of Middle
-    drawFace(9,11,14,13), //Bottom of Middle
-    drawFace(8,10,15,12), //Top of Middle
-    drawFace(8,12,13,9) //Left of Middle
-
-    //Right
-    drawFace(16,17,18,19), //Front of Right
-    drawFace(19,18,22,23), //Right of Right
-    drawFace(20,21,22,23), //Back of Right
-    drawFace(17,18,22,21), //Bottom of Right
-    drawFace(16,19,23,20), //Top of Right
-    drawFace(21,20,16,17) //Left of Right
-
-
-}
-
 
 function render()
 {
