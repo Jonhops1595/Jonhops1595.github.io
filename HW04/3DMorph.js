@@ -66,8 +66,8 @@ var h_vertices = [
 
     vec4(-.35,.25,.25,1.0), //8
     vec4(-.35,0,.25,1.0), //9
-    vec4(.35,.25,.25,1.0), //10
     vec4(.35,0,.25,1.0), //11
+    vec4(.35,.25,.25,1.0), //10
     vec4(-.35,.25,-.25,1.0), //12
     vec4(-.35,0,-.25,1.0), //13
     vec4(.35,0,-.25,1.0), //14
@@ -272,9 +272,9 @@ function render()
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         //Change direction of morph
-    if(morphPoint >= 1.0)  morphBy = -0.015;
+    if(morphPoint >= 1.0)  morphBy = -0.010;
 
-    else if (morphPoint <= 0.0) morphBy = 0.015;
+    else if (morphPoint <= 0.0) morphBy = 0.010;
 
     morphPoint += (morphToggle ? morphBy : 0.0);
 
