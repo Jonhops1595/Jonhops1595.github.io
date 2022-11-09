@@ -8,8 +8,8 @@
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "name": "Launch 3DMorph",
-            "file": "${workspaceFolder}/HW04/3DMorph.html"
+            "name": "Launch Lab",
+            "file": "${workspaceFolder}/Lab17/Lab17TextureSettings.html"
         },
 
 
