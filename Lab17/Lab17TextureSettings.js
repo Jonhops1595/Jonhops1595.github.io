@@ -4,7 +4,7 @@ var points;
 
 var positionsArray = [];
 var colorsArray = [];
-var vertexColor = vec4( ,  ,  , 1.0);  
+var vertexColor = vec4(1.0,0.0,1.0, 1.0);  
 
 window.onload = init;
 
@@ -17,9 +17,9 @@ function init()
 
 // isoceles triangle
     points=[
-    vec4(    ,    ,   , 1.0 ),
-    vec4(    ,    ,   , 1.0 ),
-    vec4(    ,    ,   , 1.0 )
+    vec4(-0.5,-0.5,0.0,1.0 ),
+    vec4(0.5,-0.5,0.0,1.0 ),
+    vec4(0.0,0.5,0.0,1.0 )
     ];
 
     positionsArray.push(points[0]);
@@ -60,16 +60,16 @@ function init()
     gl.enableVertexAttribArray(positionLoc);
 
     // texture buffer
-    var tBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, tBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
-    var texCoordLoc = gl.getAttribLocation(program, "aTexCoord");
-    gl.vertexAttribPointer(texCoordLoc, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(texCoordLoc);
+    //var tBuffer = gl.createBuffer();
+    //gl.bindBuffer(gl.ARRAY_BUFFER, tBuffer);
+    //gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
+    //var texCoordLoc = gl.getAttribLocation(program, "aTexCoord");
+    //gl.vertexAttribPointer(texCoordLoc, 2, gl.FLOAT, false, 0, 0);
+    //gl.enableVertexAttribArray(texCoordLoc);
 
-    configureTexture(image2);
+    //configureTexture(image2);
 
-    gl.uniform1i( gl.getUniformLocation(program, "uTextureMap"), 0);
+   // gl.uniform1i( gl.getUniformLocation(program, "uTextureMap"), 0);
 
     render();
 };
