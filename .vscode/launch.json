@@ -9,7 +9,7 @@
             "request": "launch",
             "reAttach": true,
             "name": "Launch Lab",
-            "file": "${workspaceFolder}/Lab18/Lab18Texture3D.html"
+            "file": "${workspaceFolder}/Lab19/Lab18TextureImage.html"
         },
 
 
