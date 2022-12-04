@@ -9,7 +9,7 @@
             "request": "launch",
             "reAttach": true,
             "name": "Launch Lab",
-            "file": "${workspaceFolder}/Lab21/Lab21ShadowMap.html"
+            "file": "${workspaceFolder}/Lab22/Lab22Robot.html"
         },
 
 
